@@ -6,29 +6,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        HashMap<String, String> words = new HashMap<>();
-        FileReader fileReader = new FileReader("words.txt");
-        BufferedReader reader = new BufferedReader(fileReader);
-        String line = reader.readLine();
-        while (line != null) {
-            System.out.println(line);
-            String[] parts = line.split(" = ");
-            String key = parts[0];
-            String value = parts[1];
-            words.put(key, value);
-            System.out.println(words);
-        }
-
-        FileWriter writer = new FileWriter("words.txt");
+        String fileName="words.txt";
+        HashMap<String, String> words = new ReadWords(fileName).read();
+        new WriteWords(words, fileName).write();
         for (Map.Entry<String, String> entry : words.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            writer.write(key + " = " + value + System.lineSeparator());
+            System.out.println(entry.getKey());
+            Scanner in = new Scanner(System.in);
+            System.out.print("Ответ: ");
+            String name = in.nextLine();
+            if (name.equals(entry.getValue())) {
+                System.out.println("Верно!");}
+            else {
+                System.out.println("Не верно!");
+                System.out.println(entry.getValue());
+            }
+
         }
-        writer.close();
     }
+
 }
+
