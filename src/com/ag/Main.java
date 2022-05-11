@@ -10,9 +10,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         String fileName="words.txt";
-        HashMap<String, String> words = new ReadWords(fileName).read();
+        ArrayList<ReadWords.Word> words = new ReadWords(fileName).read();
         new WriteWords(words, fileName).write();
-        ArrayList<String> keyWords = new ArrayList<>(words.keySet());
         int index = 0;
         while (true) {
             Random generator = new Random();

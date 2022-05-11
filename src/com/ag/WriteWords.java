@@ -1,24 +1,22 @@
 package com.ag;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class WriteWords {
-    HashMap<String, String> words = new HashMap<>();
+    ArrayList<ReadWords.Word> words = new ArrayList<>();
     String fileName;
-    WriteWords(HashMap<String, String> words, String fileName) throws IOException {
+    WriteWords(ArrayList<ReadWords.Word> words, String fileName) throws IOException {
         this.words=words;
         this.fileName=fileName;
     }
     public void write() throws IOException {
         FileWriter writer = new FileWriter(fileName);
-        for (Map.Entry<String, String> entry : words.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            writer.write(key + " = " + value + System.lineSeparator());
+        for(ReadWords.Word word: words) {
+            String eng = word.eng;
+            String rus = word.rus;
+            writer.write(eng + " = " + rus + System.lineSeparator());
         }
         writer.close();
     }
