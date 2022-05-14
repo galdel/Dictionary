@@ -7,12 +7,10 @@ import java.io.IOException;
 import java.util.*;
 
 public class Main {
-
     public static void main(String[] args) throws IOException {
         String fileName = "words.txt";
         ArrayList<ReadWords.Word> words = new ReadWords(fileName).read();
         new WriteWords(words, fileName).write();
-        int index = 0;
         Collections.shuffle(words);
         Random generator = new Random();
         for (ReadWords.Word word : words) {
